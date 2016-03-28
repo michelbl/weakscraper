@@ -38,9 +38,7 @@ A `weakscraper` template is like a regular HTML file with some keywords to tell 
 * `wp-name-attrs="name"` : This attribute that the attribute of the tag should be outputed with the name `name`. Optional if `wp-function-attrs` is set.
 * `wp-function-attrs="f"` : This attribute enables to process the attributes dictionary with a callback.
 
-## Examples
-
-### Example using `wp-name`
+## Example
 
 `template.html`
 ```html
@@ -96,6 +94,7 @@ f.close()
 }
 ```
 
+See the tests for more examples.
 
 ## How it works ?
 

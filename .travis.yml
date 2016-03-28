@@ -4,10 +4,11 @@ python:
  - "3.4"
 
 install:
- - pip install .
+- pip install coveralls
+- pip install .
 
 script:
- - python -m unittest discover -v -s tests
+ - coverage run -m unittest discover
 
 notifications:
   email:
@@ -15,3 +16,6 @@ notifications:
       - travis@michelblancard.fr
     on_success: change
     on_failure: always
+
+after_success:
+ - coveralls

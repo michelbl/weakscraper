@@ -1,8 +1,7 @@
 import collections
-
 import html.parser
-import resulttree
-import exceptions
+
+from weakparser import resulttree, exceptions
 
 
 class HtmlParser(html.parser.HTMLParser):

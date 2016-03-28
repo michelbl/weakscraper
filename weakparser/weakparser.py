@@ -1,17 +1,17 @@
-import template
-import htmlparser
-import templateparser
+from weakparser.template import Template
+from weakparser.htmlparser import HtmlParser
+from weakparser.templateparser import TemplateParser
 
 class WeakParser():
     def __init__(self, template_string, functions=None):
-        template_parser = templateparser.TemplateParser()
+        template_parser = TemplateParser()
         template_parser.feed(template_string)
         raw_template = template_parser.get_result()
 
-        self.template = template.Template(raw_template, functions)
+        self.template = Template(raw_template, functions)
 
     def parse(self, html):
-        html_parser = htmlparser.HtmlParser()
+        html_parser = HtmlParser()
         html_parser.feed(html)
         html_tree = html_parser.get_result()
 

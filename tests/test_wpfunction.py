@@ -1,7 +1,7 @@
 import unittest
 
 import weakparser
-import exceptions
+from weakparser import exceptions
 
 class TestWPFunction(unittest.TestCase):
     def setUp(self):

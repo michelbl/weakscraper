@@ -1,7 +1,7 @@
 import unittest
 
 import weakparser
-import exceptions
+from weakparser import exceptions
 
 class TestWPIgnore(unittest.TestCase):
     def setUp(self):

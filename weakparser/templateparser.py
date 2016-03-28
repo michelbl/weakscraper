@@ -1,7 +1,7 @@
 import html.parser
 import collections
 
-import exceptions
+from weakparser import exceptions
 
 class TemplateParser(html.parser.HTMLParser):
     def __init__(self):

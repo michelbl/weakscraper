@@ -1,6 +1,6 @@
 import re
 
-import exceptions
+from weakparser import exceptions
 
 
 class Template():
@@ -142,7 +142,7 @@ class Template():
         if self.nodetype == 'text':
             assert(html['nodetype'] == 'text')
             if html['content'] != self.content:
-                raise ValueError('Discrepancy in content.')
+                raise exceptions.TextError(self, html)
 
         elif self.nodetype == 'nugget':
             content = self.f(html['content'])

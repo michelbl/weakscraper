@@ -1,7 +1,7 @@
 import unittest
 
 import weakparser
-import exceptions
+from weakparser import exceptions
 
 class TestBasic(unittest.TestCase):
     def setUp(self):
@@ -57,7 +57,7 @@ class TestBasic(unittest.TestCase):
 
         try:
             result_data = self.parser.parse(content)
-        except ValueError:
+        except exceptions.TextError:
             return
 
         self.assertTrue(False)
@@ -69,17 +69,17 @@ class TestBasic(unittest.TestCase):
             <head>
               <title>Title</title>
             </head>
-            <body>
-              <p>
+            <body attr2="val2" attr1="val1">
+              <q>
                 Hi !
-              </p>
+              </q>
             </body>
             </html>
             """
 
         try:
             result_data = self.parser.parse(content)
-        except ValueError:
+        except exceptions.TagError:
             return
 
         self.assertTrue(False)
@@ -99,7 +99,7 @@ class TestBasic(unittest.TestCase):
 
         try:
             result_data = self.parser.parse(content)
-        except ValueError:
+        except exceptions.AttrsError:
             return
 
         self.assertTrue(False)

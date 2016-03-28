@@ -90,6 +90,9 @@ class TagError(CompareError):
 class AttrsError(CompareError):
     pass
 
+class TextError(CompareError):
+    pass
+
 class ExcessNodeError(CompareError):
     pass
 

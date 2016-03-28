@@ -1,6 +1,8 @@
 # weakscraper
 HTML scraper with templates
 
+[![Build Status](https://travis-ci.org/michelbl/weakscraper.svg?branch=master)](https://travis-ci.org/michelbl/weakscraper)
+
 ## Description
 
 Most HTML pages are generated using templates. Why not use templates too for scraping HTML pages? As for a template language, let's use HTML plus a few keywords. That way, the workflow with `weakscraper` is the following :

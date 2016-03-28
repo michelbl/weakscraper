@@ -99,6 +99,11 @@ f.close()
 
 ## How it works ?
 
+* Class `TemplateParser` uses `html.parser` to parse the template string to a tree of dicts.
+* Class `HtmlParser` uses `html.parser` to parse the HTML string to a tree of dicts.
+* A tree of objects of class `Template` if recursively created from the output of a `TemplateParser`. Then it compares recursively it's own structure with the output of `HtmlParser`.
+* Class `WeakScraper` glues the pieces together.
+
 ## License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)

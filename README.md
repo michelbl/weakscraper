@@ -23,6 +23,12 @@ Most HTML pages are generated using templates. Why not use templates too for scr
 ### Cons
 * To extract a bit of information, the whole parent list from the node root must be specified in the template. If you want to extract a few bits of information buried deep into the HTML tree, you probably want to use tools like `Beautiful Soup`.
 
+## Install
+
+```sh
+pip install weakscraper
+```
+
 ## Keywords
 
 A `weakscraper` template is like a regular HTML file with some keywords to tell which parts are to be kept.

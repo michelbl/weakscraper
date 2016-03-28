@@ -1,14 +1,18 @@
 # weakscraper
 HTML scraper with templates
 
+[![Python version](https://img.shields.io/pypi/pyversions/weakscraper.svg)](https://www.python.org/download/releases/3.0/)
+[![PyPI version](https://badge.fury.io/py/weakscraper.svg)](https://badge.fury.io/py/weakscraper)
 [![Build Status](https://travis-ci.org/michelbl/weakscraper.svg?branch=master)](https://travis-ci.org/michelbl/weakscraper)
+[![Coverage Status](https://coveralls.io/repos/github/michelbl/weakscraper/badge.svg?branch=master)](https://coveralls.io/github/michelbl/weakscraper?branch=master)
+
 
 ## Description
 
 Most HTML pages are generated using templates. Why not use templates too for scraping HTML pages? As for a template language, let's use HTML plus a few keywords. That way, the workflow with `weakscraper` is the following :
 * Get the source of a HTML page you want to scrap.
 * Using a few keywords, edit the HTML to select which information is of interest and which parts to discard.
-* If complex processing is required, write additional callbacks.
+* If complex processing is required, write additional callbacks in python.
 * Run `weakscraper` on the template and on the HTML.
 
 
@@ -19,8 +23,78 @@ Most HTML pages are generated using templates. Why not use templates too for scr
 ### Cons
 * To extract a bit of information, the whole parent list from the node root must be specified in the template. If you want to extract a few bits of information buried deep into the HTML tree, you probably want to use tools like `Beautiful Soup`.
 
+## Keywords
+
+A `weakscraper` template is like a regular HTML file with some keywords to tell which parts are to be kept.
+* `wp-name="name"` : This tag names an element in the output object. Optional if `wp-function` is set.
+* `wp-recursive` : This attribute signals that everything under this tag is to be kept.
+* `wp-list` : This attribute signals that this tag may be found zero, one or several time. This outputs a list.
+* `wp-function="f"` : This attribute enables to process the output of the tag with a callback.
+* `wp-optional` : This attribute signals that this tag can be found zero or one time.
+* `wp-ignore` : As a tag, signals that everything should be ignored until the parent end tag. As an attribute, same as `wp-ignore-attrs` and `wp-ignore-content`.
+* `wp-until="important-tag"` : As an attribute to the tag `wp-ignore`, signal to ignore everything until an `important-tag` is found.
+* `wp-ignore-attrs` : This attribute prevents to spawn an exception if an unlisted attribute is found.
+* `wp-ignore-content` : This attribute signals that the content of this tag should be ignored.
+* `wp-name-attrs="name"` : This attribute that the attribute of the tag should be outputed with the name `name`. Optional if `wp-function-attrs` is set.
+* `wp-function-attrs="f"` : This attribute enables to process the attributes dictionary with a callback.
+
 ## Examples
 
+### Example using `wp-name`
+
+`template.html`
+```html
+<!DOCTYPE html>
+<head>
+  <title>Title</title>
+</head>
+<body attr1="val1" wp-name="body">
+  <div wp-name="content"/>
+</body>
+</html>
+```
+
+`webpage.html`
+```html
+<!DOCTYPE html>
+<head>
+  <title>Title</title>
+</head>
+<body attr1="val1">
+  <div>Hi !</div>
+</body>
+</html>
+```
+
+`scraper.py`
+```python
+from weakscraper import WeakScraper
+
+f = open('template.html', 'r')
+template_string = f.read()
+f.close()
+
+scraper = WeakScraper(template_string)
+
+f = open('webpage.html', 'r')
+html_string = f.read()
+f.close()
+
+result_data = scraper.scrap(html_string)
+
+f = open('output.json', 'w')
+f.write(json.dumps(result_data, ident=2))
+f.close()
+```
+
+`output.json`
+```json
+{
+  "body": {
+    "content": "Hi !"
+  }
+}
+```
 
 
 ## How it works ?

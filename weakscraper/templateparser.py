@@ -34,7 +34,7 @@ class TemplateParser(html.parser.HTMLParser):
         possible_params = ['wp-name', 'wp-leaf', 'wp-function', 'wp-list',
             'wp-optional', 'wp-until', 'wp-ignore', 'wp-recursive',
             'wp-ignore-attrs', 'wp-ignore-content', 'wp-name-attrs',
-            'wp-function-attrs', 'wp-recursive-leaf']
+            'wp-function-attrs']
         for k, v in attrs:
             if k in possible_params:
                 if k == 'wp-ignore':

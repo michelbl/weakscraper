@@ -1,7 +1,7 @@
 import unittest
 
-import weakparser
-from weakparser import exceptions
+import weakscraper
+from weakscraper import exceptions
 
 class TestWPIgnore(unittest.TestCase):
     def setUp(self):
@@ -18,7 +18,7 @@ class TestWPIgnore(unittest.TestCase):
             </html>
             """
 
-        self.parser = weakparser.WeakParser(template_string)
+        self.scraper = weakscraper.WeakScraper(template_string)
 
 
     def test_until(self):
@@ -35,7 +35,7 @@ class TestWPIgnore(unittest.TestCase):
             </html>
             """
 
-        result_data = self.parser.parse(content)
+        result_data = self.scraper.scrap(content)
 
         self.assertEqual(result_data, {})
 
@@ -52,7 +52,7 @@ class TestWPIgnore(unittest.TestCase):
             </html>
             """
 
-        result_data = self.parser.parse(content)
+        result_data = self.scraper.scrap(content)
 
         self.assertEqual(result_data, {})
 
@@ -69,7 +69,7 @@ class TestWPIgnore(unittest.TestCase):
             </html>
             """
 
-        result_data = self.parser.parse(content)
+        result_data = self.scraper.scrap(content)
 
         self.assertEqual(result_data, {})
 
@@ -89,7 +89,7 @@ class TestWPIgnore(unittest.TestCase):
             </html>
             """
 
-        result_data = self.parser.parse(content)
+        result_data = self.scraper.scrap(content)
 
         self.assertEqual(result_data, {})
 
@@ -108,6 +108,6 @@ class TestWPIgnore(unittest.TestCase):
             </html>
             """
 
-        result_data = self.parser.parse(content)
+        result_data = self.scraper.scrap(content)
 
         self.assertEqual(result_data, {})

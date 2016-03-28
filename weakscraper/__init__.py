@@ -3,4 +3,4 @@
 
 __version__ = "0.0.1"
 
-from weakparser.weakparser import WeakParser
+from weakscraper.weakscraper import WeakScraper

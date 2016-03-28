@@ -1,7 +1,7 @@
 import unittest
 
-import weakparser
-from weakparser import exceptions
+import weakscraper
+from weakscraper import exceptions
 
 class TestBasic(unittest.TestCase):
     def setUp(self):
@@ -16,7 +16,7 @@ class TestBasic(unittest.TestCase):
             </html>
             """
 
-        self.parser = weakparser.WeakParser(template_string)
+        self.scraper = weakscraper.WeakScraper(template_string)
 
 
     def test_match(self):
@@ -36,7 +36,7 @@ class TestBasic(unittest.TestCase):
               </html>
             """
 
-        result_data = self.parser.parse(content)
+        result_data = self.scraper.scrap(content)
 
         self.assertEqual(result_data, {})
 
@@ -56,7 +56,7 @@ class TestBasic(unittest.TestCase):
             """
 
         try:
-            result_data = self.parser.parse(content)
+            result_data = self.scraper.scrap(content)
         except exceptions.TextError:
             return
 
@@ -78,7 +78,7 @@ class TestBasic(unittest.TestCase):
             """
 
         try:
-            result_data = self.parser.parse(content)
+            result_data = self.scraper.scrap(content)
         except exceptions.TagError:
             return
 
@@ -98,7 +98,7 @@ class TestBasic(unittest.TestCase):
             """
 
         try:
-            result_data = self.parser.parse(content)
+            result_data = self.scraper.scrap(content)
         except exceptions.AttrsError:
             return
 

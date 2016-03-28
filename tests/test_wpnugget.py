@@ -1,7 +1,7 @@
 import unittest
 
-import weakparser
-from weakparser import exceptions
+import weakscraper
+from weakscraper import exceptions
 
 class TestWPNugget(unittest.TestCase):
     def setUp(self):
@@ -14,7 +14,7 @@ class TestWPNugget(unittest.TestCase):
             </html>
             """
 
-        self.parser = weakparser.WeakParser(template_string)
+        self.scraper = weakscraper.WeakScraper(template_string)
 
 
     def test_1(self):
@@ -27,6 +27,6 @@ class TestWPNugget(unittest.TestCase):
             </html>
             """
 
-        result_data = self.parser.parse(content)
+        result_data = self.scraper.scrap(content)
 
         self.assertEqual(result_data, {'info1': 'ABC', 'info2': 'DEF', 'info3': 'GHI'})

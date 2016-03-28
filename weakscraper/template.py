@@ -1,6 +1,6 @@
 import re
 
-from weakparser import exceptions
+from weakscraper import exceptions
 
 
 class Template():

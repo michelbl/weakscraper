@@ -1,10 +1,9 @@
-import collections
 import html.parser
+import collections
 
-from weakparser import resulttree, exceptions
+from weakscraper import exceptions
 
-
-class HtmlParser(html.parser.HTMLParser):
+class TemplateParser(html.parser.HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
 
@@ -31,33 +30,34 @@ class HtmlParser(html.parser.HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         attrs_dict = {}
-        is_leaf = False
-        is_decl = False
+        params = {}
+        possible_params = ['wp-name', 'wp-leaf', 'wp-function', 'wp-list',
+            'wp-optional', 'wp-until', 'wp-ignore', 'wp-recursive',
+            'wp-ignore-attrs', 'wp-ignore-content', 'wp-name-attrs',
+            'wp-function-attrs', 'wp-recursive-leaf']
         for k, v in attrs:
-            if k == 'wp-leaf':
-                is_leaf = True
-            elif k == 'wp-decl':
-                is_decl = True
+            if k in possible_params:
+                if k == 'wp-ignore':
+                    params['wp-ignore-content'] = None
+                    params['wp-ignore-attrs'] = None
+                elif k == 'wp-recursive-leaf':
+                    params['wp-leaf'] = None
+                    params['wp-recursive-leaf'] = None
+                else:
+                    params[k] = v
+            elif k in attrs_dict:
+                raise ValueError('Attribute defined multiple times in tag.')
             else:
                 attrs_dict[k] = v
 
-        if tag in ['meta', 'link', 'br', 'img', 'input']:
-            is_leaf = True
-
-        if tag == 'html':
-            if not is_decl:
-                is_leaf = True
-
         brothers = self.genealogy[-1]
 
-        if is_leaf:
-            node = {'nodetype': 'tag', 'name': tag, 'attrs': attrs_dict}
-            brothers.append(node)
-        else:
-            children = []
-            node = {'nodetype': 'tag', 'name': tag, 'attrs': attrs_dict,
-                'children': children}
-            brothers.append(node)
+        children = []
+        node = {'nodetype': 'tag', 'name': tag, 'attrs': attrs_dict,
+            'params': params, 'children': children}
+        brothers.append(node)
+
+        if 'wp-leaf' not in node['params']:
             self.genealogy.append(node['children'])
 
     def handle_endtag(self, tag):
@@ -90,11 +90,11 @@ class HtmlParser(html.parser.HTMLParser):
         raise AssertionError('This portion of code should never be reached.')
 
     def handle_comment(self, text):
-        # ignore comments !
-        pass
+        raise AssertionError('This portion of code should never be reached.')
+        #print('comment:' + text)
 
     def handle_decl(self, decl):
-        self.handle_starttag('html', [('wp-decl', None)])
+        self.handle_starttag('html', {})
 
     def handle_pi(self, decl):
         raise AssertionError('PI.')

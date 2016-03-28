@@ -1,8 +1,8 @@
-from weakparser.template import Template
-from weakparser.htmlparser import HtmlParser
-from weakparser.templateparser import TemplateParser
+from weakscraper.template import Template
+from weakscraper.htmlparser import HtmlParser
+from weakscraper.templateparser import TemplateParser
 
-class WeakParser():
+class WeakScraper():
     def __init__(self, template_string, functions=None):
         template_parser = TemplateParser()
         template_parser.feed(template_string)
@@ -10,7 +10,7 @@ class WeakParser():
 
         self.template = Template(raw_template, functions)
 
-    def parse(self, html):
+    def scrap(self, html):
         html_parser = HtmlParser()
         html_parser.feed(html)
         html_tree = html_parser.get_result()

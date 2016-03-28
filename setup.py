@@ -3,20 +3,20 @@
 
 from setuptools import setup, find_packages
 
-import weakparser
+import weakscraper
 
 setup(
-    name="weakparser",
-    version=weakparser.__version__,
+    name="weakscraper",
+    version=weakscraper.__version__,
     author="Michel Blancard",
     license="MIT",
-    description="HTML parser with templates",
+    description="HTML scraper with templates",
     long_description=open('README.md').read(),
     packages=find_packages(),
-    url="https://github.com/michelbl/weakparser",
+    url="https://github.com/michelbl/weakscraper",
     classifiers=['Development Status :: 3 - Alpha',
                  'License :: OSI Approved :: MIT License',
                  'Programming Language :: Python :: 3'],
-    keywords='parser HTML template',
+    keywords='parser scraper HTML template',
     install_requires=[]
 )

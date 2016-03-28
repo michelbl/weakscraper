@@ -1,7 +1,7 @@
 import unittest
 
-import weakparser
-from weakparser import exceptions
+import weakscraper
+from weakscraper import exceptions
 
 class TestWPList(unittest.TestCase):
     def setUp(self):
@@ -23,7 +23,7 @@ class TestWPList(unittest.TestCase):
         }
 
 
-        self.parser = weakparser.WeakParser(template_string, functions)
+        self.scraper = weakscraper.WeakScraper(template_string, functions)
 
 
 
@@ -35,7 +35,7 @@ class TestWPList(unittest.TestCase):
             </html>
             """
 
-        result_data = self.parser.parse(content)
+        result_data = self.scraper.scrap(content)
 
         self.assertEqual(result_data, {'sum': 0, 'str_sum': 0})
 
@@ -57,6 +57,6 @@ class TestWPList(unittest.TestCase):
             </html>
             """
 
-        result_data = self.parser.parse(content)
+        result_data = self.scraper.scrap(content)
 
         self.assertEqual(result_data, {'sum': 7, 'str_sum': 6})

@@ -1,7 +1,7 @@
 import unittest
 
-import weakparser
-from weakparser import exceptions
+import weakscraper
+from weakscraper import exceptions
 
 class TestWPFunction(unittest.TestCase):
     def setUp(self):
@@ -19,7 +19,7 @@ class TestWPFunction(unittest.TestCase):
             'sum': (lambda dic: dic['a'] + dic['b'])
         }
 
-        self.parser = weakparser.WeakParser(template_string, functions)
+        self.scraper = weakscraper.WeakScraper(template_string, functions)
 
 
     def test_sum(self):
@@ -36,6 +36,6 @@ class TestWPFunction(unittest.TestCase):
             </html>
             """
 
-        result_data = self.parser.parse(content)
+        result_data = self.scraper.scrap(content)
 
         self.assertEqual(result_data, {'sum': 7})

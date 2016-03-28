@@ -1,7 +1,7 @@
 import unittest
 
-import weakparser
-from weakparser import exceptions
+import weakscraper
+from weakscraper import exceptions
 
 class TestWPName(unittest.TestCase):
     def setUp(self):
@@ -13,7 +13,7 @@ class TestWPName(unittest.TestCase):
             </html>
             """
 
-        self.parser = weakparser.WeakParser(template_string)
+        self.scraper = weakscraper.WeakScraper(template_string)
 
 
     def test_match(self):
@@ -25,6 +25,6 @@ class TestWPName(unittest.TestCase):
             </html>
             """
 
-        result_data = self.parser.parse(content)
+        result_data = self.scraper.scrap(content)
 
         self.assertEqual(result_data, {'head': {'title': 'Title'}})

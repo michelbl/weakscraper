@@ -246,6 +246,7 @@ class Template():
                         while (
                             (html_position < html_n_children) and
                             (html['children'][html_position]['nodetype'] == 'tag') and
+                            self_child.attrs_match(html['children'][html_position]['attrs']) and
                             (html['children'][html_position]['name'] == self_child.name)
                         ):
                             result = self.compare_wrapper(self_child, html['children'][html_position])

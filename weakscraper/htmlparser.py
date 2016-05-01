@@ -13,7 +13,8 @@ class HtmlParser(html.parser.HTMLParser):
 
     def assert_complete(self):
         assert(len(self.genealogy) == 1)
-        assert(len(self.genealogy[0]) == 1)
+        if len(self.genealogy[0]) != 1:
+            raise exceptions.AssertCompleteFailure(self.genealogy)
         root_node = self.genealogy[0][0]
         assert(root_node['nodetype'] == 'tag')
         assert(root_node['name'] == 'html')

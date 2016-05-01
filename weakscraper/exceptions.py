@@ -1,6 +1,8 @@
 import collections
 import json
 
+
+
 def genealogy_pretty_output(genealogy):
     message = ''
 
@@ -44,6 +46,9 @@ class ParsingError(Exception):
 
 
 class EndTagError(ParsingError):
+    pass
+
+class AssertCompleteFailure(ParsingError):
     pass
 
 
@@ -97,4 +102,7 @@ class ExcessNodeError(CompareError):
     pass
 
 class MissingNodeError(CompareError):
+    pass
+
+class NonAtomicChildError(CompareError):
     pass

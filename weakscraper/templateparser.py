@@ -64,10 +64,10 @@ class TemplateParser(html.parser.HTMLParser):
         parent = self.genealogy[-2][-1]
 
         if (parent['nodetype'] != 'tag'):
-            raise exceptions.NodeTypeDiscrepancy(self.genealogy,
+            raise exceptions.EndTagError(self.genealogy,
                 parent['nodetype'])
         if (parent['name'] != tag):
-            raise exceptions.EndTagDiscrepancy(self.genealogy,
+            raise exceptions.EndTagError(self.genealogy,
                 parent['name'])
 
         self.genealogy.pop()

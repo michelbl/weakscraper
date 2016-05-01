@@ -191,10 +191,14 @@ class Template():
                     if not 'wp-ignore-content' in self.params:
                         if 'wp-name' in self.params:
                             name = self.params['wp-name']
-                            assert(len(html['children']) == 1)
-                            html_child = html['children'][0]
-                            assert(html_child['nodetype'] == 'text')
-                            content = html_child['content']
+                            if len(html['children']) == 0:
+                                content = ''
+                            elif len(html['children']) == 1:
+                                html_child = html['children'][0]
+                                assert(html_child['nodetype'] == 'text')
+                                content = html_child['content']
+                            else:
+                                raise exceptions.NonAtomicChildError(self, html)
                             results[name] = self.f(content)
                         else:
                             assert('children' not in html)
@@ -289,7 +293,7 @@ class Template():
                 html_position = skip_children(html, html_position)
 
                 if html_position != html_n_children:
-                    raise exceptions.ExcessNodeError(self, html)
+                    raise exceptions.ExcessNodeError(self, html['children'][html_position])
 
                 if 'wp-name' in self.params:
                     name = self.params['wp-name']

@@ -271,6 +271,7 @@ class Template():
                             (
                                 (html_position >= html_n_children) or
                                 (html['children'][html_position]['nodetype'] != 'tag') or
+                                (not self_child.attrs_match(html['children'][html_position]['attrs'])) or
                                 (html['children'][html_position]['name'] != self_child.name)
                             )
                         ):

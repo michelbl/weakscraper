@@ -195,7 +195,8 @@ class Template():
                                 content = ''
                             elif len(html['children']) == 1:
                                 html_child = html['children'][0]
-                                assert(html_child['nodetype'] == 'text')
+                                if html_child['nodetype'] != 'text':
+                                    raise exceptions.TextExpectedError(self, html_child)
                                 content = html_child['content']
                             else:
                                 raise exceptions.NonAtomicChildError(self, html)

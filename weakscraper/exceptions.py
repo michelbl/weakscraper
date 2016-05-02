@@ -89,6 +89,9 @@ class CompareError(Exception):
 class NodetypeError(CompareError):
     pass
 
+class TextExpectedError(CompareError):
+    pass
+
 class TagError(CompareError):
     pass
 

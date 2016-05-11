@@ -140,7 +140,8 @@ class Template():
         results = {}
 
         if self.nodetype == 'text':
-            assert(html['nodetype'] == 'text')
+            if html['nodetype'] != 'text':
+                raise exceptions.NodetypeError(self, html)
             if html['content'] != self.content:
                 raise exceptions.TextError(self, html)
 

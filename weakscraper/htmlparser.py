@@ -37,17 +37,17 @@ class HtmlParser(html.parser.HTMLParser):
         for k, v in attrs:
             if k == 'wp-leaf':
                 is_leaf = True
-            elif k == 'wp-decl':
-                is_decl = True
+            #elif k == 'wp-decl':
+            #    is_decl = True
             else:
                 attrs_dict[k] = v
 
         if tag in ['meta', 'link', 'br', 'img', 'input']:
             is_leaf = True
 
-        if tag == 'html':
-            if not is_decl:
-                is_leaf = True
+        #if tag == 'html':
+        #    if not is_decl:
+        #        is_leaf = True
 
         brothers = self.genealogy[-1]
 
@@ -95,7 +95,8 @@ class HtmlParser(html.parser.HTMLParser):
         pass
 
     def handle_decl(self, decl):
-        self.handle_starttag('html', [('wp-decl', None)])
+        #self.handle_starttag('html', [('wp-decl', None)])
+        pass
 
     def handle_pi(self, decl):
         raise AssertionError('PI.')

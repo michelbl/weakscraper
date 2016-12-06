@@ -94,7 +94,8 @@ class TemplateParser(html.parser.HTMLParser):
         #print('comment:' + text)
 
     def handle_decl(self, decl):
-        self.handle_starttag('html', {})
+        raise AssertionError('This portion of code should never be reached.')
+        #self.handle_starttag('html', {})
 
     def handle_pi(self, decl):
         raise AssertionError('PI.')
